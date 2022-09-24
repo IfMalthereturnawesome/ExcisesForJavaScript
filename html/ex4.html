@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <section>
+      <h1>Exercise-4</h1>
+    </section>
+    <button id="initialize-btn">Load Data</button>
+
+    <table id="myTable" class="table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">ID</th>
+          <th onclick="sortTable(1)">Year</th>
+          <th onclick="sortTable(2)">Make</th>
+          <th onclick="sortTable(3)">Model</th>
+          <th onclick="sortTable(4)">Price</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <form>
+      <label for="input1">Price:</label>
+      <input id="input1" type="number" />
+      <button id="btn1">Price less than</button>
+    </form>
+  </body>
+
+  <script>
+    const cars = [
+      { id: 1, year: 1997, make: "Ford", model: "E350", price: 3000 },
+      { id: 2, year: 1999, make: "Chevy", model: "Venture", price: 4900 },
+      { id: 3, year: 2000, make: "Chevy", model: "Venture", price: 5000 },
+      { id: 4, year: 1996, make: "Jeep", model: "Grand Cherokee", price: 4799 },
+      { id: 5, year: 2005, make: "Volvo", model: "V70", price: 44799 },
+      { id: 6, year: 2015, make: "Volvo", model: "V70", price: 49999 },
+    ];
+
+    const tbody = document.getElementById("tbody");
+
+    function createRows(para1) {
+      if (para1.length === 0) {
+        tbody.innerHTML = "No data found";
+      } else {
+        tbody.innerHTML = "";
+        for (let i = 0; i < para1.length; i++) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${para1[i].id}</td>
+            <td>${para1[i].year}</td>
+            <td>${para1[i].make}</td>
+            <td>${para1[i].model}</td>
+            <td>${para1[i].price}</td>
+          `;
+          tbody.appendChild(tr);
+        }
+      }
+    }
+    document.getElementById("initialize-btn").onclick = () => createRows(cars);
+
+    document.getElementById("btn1").onclick = (evt) => {
+      evt.preventDefault();
+      const input1 = document.getElementById("input1").value;
+      const filteredCars = cars.filter((car) => car.price < input1);
+      createRows(filteredCars);
+    };
+  </script>
+  <script>
+    function sortTable(n) {
+      var table,
+        rows,
+        switching,
+        i,
+        x,
+        y,
+        shouldSwitch,
+        dir,
+        switchcount = 0;
+      table = document.getElementById("myTable");
+      switching = true;
+      // Set the sorting direction to ascending:
+      dir = "asc";
+      /* Make a loop that will continue until
+  no switching has been done: */
+      while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+    first, which contains table headers): */
+        for (i = 1; i < rows.length - 1; i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount++;
+        } else {
+          /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+  </script>
+</html>

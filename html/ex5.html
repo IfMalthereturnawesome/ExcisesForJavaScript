@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="fetch.js"></script>
+  </head>
+  <body>
+    <section>
+      <h1>Day 2 - Exercise-1</h1>
+    </section>
+
+    <form>
+      <label for="input1">User: </label>
+      <input id="input1" type="number" />
+      <button id="btn1">Get User</button>
+      <button id="getAll">Get All</button>
+    </form>
+    <ul>
+      <li>
+        <span id="name"></span>
+      </li>
+      <li>
+        <span id="phone"></span>
+      </li>
+    </ul>
+    <br />
+    <br />
+   
+
+    <ul>
+      <li>
+        <span id="street"></span>
+      </li>
+      <li>
+        <span id="city"></span>
+      </li>
+      <li>
+        <span id="zipcode"></span>
+      </li>
+      <li>
+        <span id="geo"></span>
+      </li>
+    </ul>
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </body>
+  <script>
+    // Exercise 1: Get the user with id 4 and display the name, phone and address of the user.
+    // You can use the following API to get the user: https://jsonplaceholder.typicode.com/users/4
+
+    const btn1 = document.getElementById("btn1");
+    const input1 = document.getElementById("input1");
+    const name = document.getElementById("name");
+    const phone = document.getElementById("phone");
+    const street = document.getElementById("street");
+    const city = document.getElementById("city");
+    const zipcode = document.getElementById("zipcode");
+    const geo = document.getElementById("geo");
+    const name2 = document.getElementById("name2");
+    const phone2 = document.getElementById("phone2");
+    const getAll = document.getElementById("getAll");
+
+    btn1.addEventListener("click", (e) => {
+      e.preventDefault();
+      fetchUrl(input1.value);
+    });
+
+    getAll.addEventListener("click", (e) => {
+      e.preventDefault();
+      fetchAll();
+    });
+  </script>
+</html>

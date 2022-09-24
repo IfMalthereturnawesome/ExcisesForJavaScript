@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercise-1</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <section>
+      <h1>Exercise-1</h1>
+   </section>
+
+    <button id="button1">Change Color</button>
+    <div id="div1">&nbsp;</div>
+    <div id="div2">&nbsp;</div>
+    <div id="div3">&nbsp;</div>
+  </body>
+
+  <script>
+    const divColor = document.querySelectorAll("div");
+    for (let i = 0; i < divColor.length; i++) {
+      divColor[i].style.backgroundColor = "red";
+    }
+
+    const button = document.getElementById("button1");
+    button.addEventListener("click", function () {
+      let div1 = document.getElementById("div1");
+      let div2 = document.getElementById("div2");
+      let div3 = document.getElementById("div3");
+      div1.style.backgroundColor = "blue";
+      div2.style.backgroundColor = "green";
+      div3.style.backgroundColor = "purple";
+    });
+  </script>
+</html>
